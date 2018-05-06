@@ -2,4 +2,24 @@
 
 {% block main %}
     <h2>Overview</h2>
+    <table class="table"> 
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">First Name</th><th>Last Name</th><th>Birthdate</th><th>Age</th><th>Sex</th><th>Weekly Workload</th><th>Department</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for employee in db_employees %}
+            <tr class="text-center">
+                <td>{{ employee[1] }}</td>
+                <td>{{ employee[2] }}</td>
+                <td>{{ employee[3] }}</td>
+                <td>{{ employee[4] }}</td>
+                <td>{{ employee[5] }}</td>
+                <td>{{ employee[6] }}</td>
+                <td>{{ employee[7] }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

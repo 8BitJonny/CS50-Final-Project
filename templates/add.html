@@ -2,4 +2,62 @@
 
 {% block main %}
     <h2>Add an Employee</h2>
+    <form action="/add" method="POST">
+        <div class="form-row">
+            <div class="form-group col-md-5">
+                <label for="firstName">First Name</label>
+                <input type="text" class="form-control" id="firstName" placeholder="Max">
+            </div>        
+            <div class="form-group col-md-5">
+                <label for="lastName">Last Name</label>
+                <input type="text" class="form-control" id="lastName" placeholder="Mustermann">
+            </div>
+            <div class="form-group col-md-2">
+                <label for="gender">Gender</label>
+                <select class="form-control" id="gender">
+                    <option value="women">Women</option>
+                    <option value="men">Men</option>
+                    <option value="other">other</option>
+                </select>
+            </div>
+        </div>
+        <h5 class="d-block">Birthdate</h5>
+        <div class="form-row">
+            <div class="form-group col-md-2">
+                <label for="day">Day</label>
+                <select class="form-control" id="day">
+                    {% for day in range(1, 32) %}
+                        <option value="{{ day }}">{{ day }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-2">
+                <label for="month">Month</label>
+                <select class="form-control" id="month">
+                    {% for month in range(1, 13) %}
+                        <option value="{{ month }}">{{ month }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="year">Year</label>
+                <select class="form-control" id="year">
+                    {% for year in range(0, 43) %}
+                        <option value="{{ 2000 - year }}">{{ 2000 - year }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="form-group col-md-3">
+                <label for="department">Department</label>
+                <input type="text" class="form-control" id="department" placeholder="IT">
+            </div>        
+            <div class="form-group col-md-2">
+                <label for="workload">Weekly Workload</label>
+                <input type="number" class="form-control" id="workload" placeholder="40">
+            </div>    
+        </div>
+        <div class="form-row">
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
 {% endblock %}

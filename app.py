@@ -42,3 +42,11 @@ def add():
 @app.route("/search")
 def search():
     return render_template("search.html")
+
+@app.route("/delete", methods=["GET", "POST"])
+def delete():
+    if request.method == "POST":
+        with sqlite3.connect("company.db") as con:
+            cursor = con.cursor()
+            cursor.execute("DELETE FROM employees WHERE id = (?)", (request.form["uid"]))
+    return redirect("/")

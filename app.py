@@ -1,5 +1,6 @@
 from flask import Flask, flash, redirect, render_template, request, session
 import sqlite3
+import datetime
 
 app = Flask(__name__)
 
@@ -19,8 +20,23 @@ def index():
         db_employees = cursor.fetchall()
     return render_template("index.html", db_employees=db_employees)
 
-@app.route("/add")
+@app.route("/add", methods=["GET", "POST"])
 def add():
+    if request.method == "POST":
+        print(len(request.form))
+        print(request.form["year"],request.form["month"],request.form["day"])    
+        with sqlite3.connect("company.db") as con:
+            birthdate = datetime.date(int(request.form["year"]),int(request.form["month"]),int(request.form["day"])).isoformat()
+            cursor = con.cursor()
+            cursor.execute("INSERT INTO employees (firstname, lastname, birthdate, age, sex, workload_per_week, work_group) VALUES (?,?,?,?,?,?,?)",
+                (request.form.get("firstName"),
+                request.form.get("lastName"),
+                birthdate,
+                datetime.datetime.now().year - int(request.form.get("year")),
+                request.form.get("gender"),
+                int(request.form.get("workload")),
+                request.form.get("department")))
+        return redirect("/")
     return render_template("add.html")
 
 @app.route("/search")

@@ -2,10 +2,18 @@
 
 {% block main %}
     <h2>Overview</h2>
-    <table class="table"> 
+    <table class="table" id="employees"> 
         <thead class="thead-dark">
             <tr>
-                <th>UID</th><th>First Name</th><th>Last Name</th><th>Birthdate</th><th>Age</th><th>Sex</th><th>Weekly Workload</th><th>Department</th><th></th>
+                <th>UID <img src="/static/down-arrow.svg" id ="arrow0" height="16px" onclick="sort(0)"></th>
+                <th>First Name <img src="/static/down-arrow.svg" id ="arrow1" height="16px" onclick="sort(1)"></th>
+                <th>Last Name <img src="/static/down-arrow.svg" id ="arrow2" height="16px" onclick="sort(2)"></th>
+                <th>Birthdate <img src="/static/down-arrow.svg" id ="arrow3" height="16px" onclick="sort(3)"></th>
+                <th>Age <img src="/static/down-arrow.svg" id ="arrow4" height="16px" onclick="sort(4)"></th>
+                <th>Sex <img src="/static/down-arrow.svg" id ="arrow5" height="16px" onclick="sort(5)"></th>
+                <th>Weekly Workload <img src="/static/down-arrow.svg" id ="arrow6" height="16px" onclick="sort(6)"></th>
+                <th>Department <img src="/static/down-arrow.svg" id ="arrow7" height="16px" onclick="sort(7)"></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>

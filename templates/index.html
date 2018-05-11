@@ -1,10 +1,11 @@
 {% extends "layout.html" %}
 
 {% block main %}
-    <button class="filter">Filter</button>
-    <div class="filtercontent" style="display: none">
-            <div class="form-row">
-                <div class="form-group col-md-2">
+    <h2>Overview</h2>
+    <button class="filter btn-block btn btn-dark text-left">Filter <img src="/static/down-arrow.svg" class="float-right" id ="arrow0" height="16px"></button>
+    <div class="filtercontent p-3 bg-light border border-dark" style="display: none">
+            <div class="form-inline">
+                <div class="form-group">
                     <select class="custom-select" id="searchCategory">
                         <option selected>--Category--</option>
                         <option value="0">UID</option>                    
@@ -17,14 +18,14 @@
                         <option value="7">Department</option>                                        
                     </select>
                 </div>
-                <div class="form-group">
-                    <input type="text" id="query">
+                <div class="form-group mx-3">
+                    <input type="text" class="form-control"id="query">
                 </div>
-                <button class="btn btn-primary" onclick="updateFilter()">Submit</button>
+                <button class="btn btn-primary mr-3" onclick="updateFilter()">Submit</button>
+                <button class="btn btn-danger" onclick="location.href='/';">Reset</button>
             </div>
     </div>
-    <h2>Overview</h2>
-    <table class="table" id="employees"> 
+    <table class="table mt-4" id="employees"> 
         <thead class="thead-dark">
             <tr>
                 <th>UID <img src="/static/down-arrow.svg" id ="arrow0" height="16px" onclick="sort(0)"></th>

@@ -1,6 +1,28 @@
 {% extends "layout.html" %}
 
 {% block main %}
+    <button class="filter">Filter</button>
+    <div class="filtercontent" style="display: none">
+            <div class="form-row">
+                <div class="form-group col-md-2">
+                    <select class="custom-select" id="searchCategory">
+                        <option selected>--Category--</option>
+                        <option value="0">UID</option>                    
+                        <option value="1">First Name</option>
+                        <option value="2">Last Name</option>
+                        <option value="3">Birthdate</option>
+                        <option value="4">Age</option>
+                        <option value="5">Gender</option>
+                        <option value="6">Weekly Workload</option>
+                        <option value="7">Department</option>                                        
+                    </select>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="query">
+                </div>
+                <button class="btn btn-primary" onclick="updateFilter()">Submit</button>
+            </div>
+    </div>
     <h2>Overview</h2>
     <table class="table" id="employees"> 
         <thead class="thead-dark">
@@ -10,7 +32,7 @@
                 <th>Last Name <img src="/static/down-arrow.svg" id ="arrow2" height="16px" onclick="sort(2)"></th>
                 <th>Birthdate <img src="/static/down-arrow.svg" id ="arrow3" height="16px" onclick="sort(3)"></th>
                 <th>Age <img src="/static/down-arrow.svg" id ="arrow4" height="16px" onclick="sort(4)"></th>
-                <th>Sex <img src="/static/down-arrow.svg" id ="arrow5" height="16px" onclick="sort(5)"></th>
+                <th>Gender <img src="/static/down-arrow.svg" id ="arrow5" height="16px" onclick="sort(5)"></th>
                 <th>Weekly Workload <img src="/static/down-arrow.svg" id ="arrow6" height="16px" onclick="sort(6)"></th>
                 <th>Department <img src="/static/down-arrow.svg" id ="arrow7" height="16px" onclick="sort(7)"></th>
                 <th></th>

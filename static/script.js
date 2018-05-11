@@ -29,12 +29,7 @@ function updateFilter()
     var rowArray = Array.from(table.getElementsByTagName("TBODY")[0].getElementsByTagName("TR"))
     var sortedTable = mergesort(rowArray,searchCategory,'ASC')
     
-    if (!isNaN(query))
-    {
-        query = parseInt(query)
-    }
-    
-    var founditem = splitSearch(sortedTable,searchCategory,query)
+    var founditem = splitSearch(sortedTable,searchCategory,query,0,sortedTable.length)
     if (!founditem) {founditem = rowArray}
 
     createSearchTable(rowArray, founditem)
@@ -90,16 +85,7 @@ function mergesort(rows,index,direction)
                 var leftValue =  leftSorted[0].getElementsByTagName("TD")[index].innerHTML
                 var rightValue = rightSorted[0].getElementsByTagName("TD")[index].innerHTML
                 
-                if (!isNaN(leftValue))
-                {
-                    leftValue = parseInt(leftValue)
-                } 
-                if (!isNaN(rightValue))
-                {
-                    rightValue = parseInt(rightValue)
-                }
-
-                if (leftValue <= rightValue)
+                if (compare(leftValue,rightValue,index) <= 0)
                 {
                     if (direction == "ASC") {sorted.push(leftSorted.shift())}
                     else {sorted.push(rightSorted.shift())}
@@ -114,54 +100,66 @@ function mergesort(rows,index,direction)
     }
 }
 
-function splitSearch(rows,searchCategory,query)
+function splitSearch(rows,searchCategory,query,low,high)
 {
-    if (rows.length < 1) {return}
-    var row = rows[((rows.length/2) | 0)]
-    var focusedItem = row.getElementsByTagName("TD")[searchCategory].innerHTML
-    if (!isNaN(focusedItem))
-    {
-        focusedItem = parseInt(focusedItem)
-    }
-    if (query == focusedItem && rows.length > 1)
-    {
-        var result = [row]
-        var leftHalf = rows.slice(0,(rows.length/2) | 0)
-        var leftResult = splitSearch(leftHalf,searchCategory,query)
-    
-        var rightHalf = rows.slice(((rows.length/2) | 0) + 1)
-        var rightResult = splitSearch(rightHalf,searchCategory,query)
-    
-        if (leftResult) {result = result.concat(leftResult)}
-        if (rightResult) {result = result.concat(rightResult)}
-    
-        return result
-    }
-    else if (query == focusedItem)
-    {
-        return [row]
-    }
-    else if (rows.length <= 1)
+    if (low > high)
     {
         return
     }
-    else if (query < focusedItem)
+
+    var mid = (low + high)/2 | 0 
+    var focusedItem = rows[mid].getElementsByTagName("TD")[searchCategory].innerHTML
+
+    if (compare(query,focusedItem,searchCategory) == 0)
     {
-        var leftHalf = rows.slice(0,(rows.length/2) | 0)
-        return splitSearch(leftHalf,searchCategory,query)
+        //return [rows[mid]]
+        var result = [rows[mid]]
+        result = result.concat(splitSearch(rows,searchCategory,query,low,mid-1))
+        result = result.concat(splitSearch(rows,searchCategory,query,mid+1,high))
+        console.log(result)
+        return result
     }
-    else if (query > focusedItem)
+    else if (compare(query,focusedItem,searchCategory) == -1)
     {
-        var rightHalf = rows.slice((rows.length/2) | 0)
-        return splitSearch(rightHalf,searchCategory,query)
-    }
-    else
+        high = mid - 1
+        return splitSearch(rows,searchCategory,query,low,high)
+    } 
+    else 
     {
-        console.log("Confused")
+        low = mid + 1
+        return splitSearch(rows,searchCategory,query,low,high)
     }
 }
 
-function createSortedTable(table, tableData) {
+function compare(a,b,index)
+{
+    if (index == 3)
+    {
+        a = new Date(a).getTime()
+        b = new Date(b).getTime()
+    }
+    else if (index == 0 || index == 4 || index == 6)
+    {
+        a = parseInt(a)
+        b = parseInt(b)
+    } 
+    if (a > b)
+    {
+        return 1
+    } 
+    else if (a < b)
+    {
+        return -1
+    } 
+    else
+    {
+        return 0
+    }
+
+}
+
+function createSortedTable(table, tableData)
+{
     var tableBody = document.createElement('tbody')
   
     tableData.forEach(function(row) 

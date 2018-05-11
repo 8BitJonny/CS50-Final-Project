@@ -1,6 +1,7 @@
 import sqlite3
 conn = sqlite3.connect("company.db")
 from random import randint,randrange
+from datetime import date
 
 c = conn.cursor()
 lastNames = ["Hansen","Petersen","Hoeg","Thomsen","Schmidt","Christiansen","Smith","Johnsen","Williams","Brown","Jones","Miller","Horn","James","Petersen","Rich","Valentine","Boyd","Estes","Morris","Bryant","Marquez","Simon","Kaufman","Lindsey","Ali","Cisneros","Hayden","Pope","Schmitt","Stewart","Pruitt"]
@@ -17,7 +18,7 @@ for i in range(30):
     firstName = names[gender][randint(0,34)]
     sex = genders[gender]
     age = randint(18,62)
-    birthdate = str((2018 - age)) + "-" + str(randint(1,12)) + "-" + str(randint(1,28))
+    birthdate = date((2018 - age), randint(1,12), randint(1,28)).isoformat()
     work_load = randrange(15,40,5)
     work_group = departments[randint(0,4)]
     employee = (i,firstName,lastName,birthdate,age,sex,work_load,work_group)

@@ -76,5 +76,4 @@ to start the backend part of the application.
 
 https://youtu.be/OzLKYQGWvnI
 
-## Technical Paper
-...
+

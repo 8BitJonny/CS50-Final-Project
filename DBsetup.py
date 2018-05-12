@@ -4,6 +4,8 @@ from random import randint,randrange
 from datetime import date
 
 c = conn.cursor()
+
+# Build all lists for lastNames, maleNames, femaleNames, departments, genders
 lastNames = ["Hansen","Petersen","Hoeg","Thomsen","Schmidt","Christiansen","Smith","Johnsen","Williams","Brown","Jones","Miller","Horn","James","Petersen","Rich","Valentine","Boyd","Estes","Morris","Bryant","Marquez","Simon","Kaufman","Lindsey","Ali","Cisneros","Hayden","Pope","Schmitt","Stewart","Pruitt"]
 maleNames = ["James","John","Robert","Micheal","William","David","Richard","Dennis","Walter","Patrick","Peter","Joe","Jack","Terry","Daniel","Jason","Jeffrey","Ryan","Gary","Jacob","Nicholas","Eric","Stephen","Jonathan","Larry","Justin","Scott","Frank","Brandon","Raymond","Gregory","Benjamin","Samuel","Patrick","Alexander"]
 femaleNames = ["Mary","Patricia","Linda","Barbara","Elizabeth","Jennifer","Karen","Judy","Irene","Jane","Lori","Judy","Ruby","Lois","Tina","Emma","Olivia","Ava","Isabella","Sophia","Mia","Amelia","Charlotte","Abigail","Emily","Arlene","Maureen","Collen","Allison","Tamara","Joy","Georgia","Constance","Lillie","Claudia"]
@@ -12,6 +14,7 @@ departments = ["IT","Sales","HR","Marketing","Research"]
 genders = ["M","W"]
 employees = []
 
+# Genereate 30 Employees with random attributes
 for i in range(30):
     lastName = lastNames[randint(0,31)]
     gender = randint(0,1)
@@ -25,18 +28,17 @@ for i in range(30):
     print(employee)
     employees.append(employee)
 
-#Create Table
+# Drop previous Table
 c.execute('''DROP TABLE employees''')
 
+# Create new Table
 c.execute('''CREATE TABLE employees
              (id integer primary key autoincrement, firstname text, lastname text, birthdate text, age integer, sex text, workload_per_week real, work_group text)''')
 
-# Insert a row of data
+# Insert a all 30 rows of data
 c.executemany('INSERT INTO employees VALUES (?,?,?,?,?,?,?,?)', employees)
 
 # Save (commit) the changes
 conn.commit()
 
-# We can also close the connection if we are done with it.
-# Just be sure any changes have been committed or they will be lost.
 conn.close()

@@ -5,6 +5,7 @@ app = Flask(__name__)
 
 @app.route("/index")
 def index():
+    # Build Sql Connection, get all rows and return the json object of it
     with sqlite3.connect("company.db") as con:
         cursor = con.cursor()
         cursor.execute("SELECT * FROM employees")
@@ -13,6 +14,7 @@ def index():
 
 @app.route("/add", methods=["POST"])
 def add():
+    # Build Sql Connection, insert the values that come from the querystring
     with sqlite3.connect("company.db") as con:
         cursor = con.cursor()    
         cursor.execute("INSERT INTO employees (firstname, lastname, birthdate, age, sex, workload_per_week, work_group) VALUES (?,?,?,?,?,?,?)",
@@ -27,6 +29,7 @@ def add():
 
 @app.route("/delete", methods=["POST"])
 def delete():
+    # Build Sql Connection, get UID from querystring and execute Delete Statements
     if request.args.get("uid", ""):
         with sqlite3.connect("company.db") as con:
             cursor = con.cursor()

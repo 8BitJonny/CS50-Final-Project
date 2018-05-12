@@ -5,7 +5,9 @@ This is the Final Project of the CS50 online course series from Timon Christians
 ...
 
 ## Short Video Explanation of my Work
-...
+[![Alt text for your video](https://img.youtube.com/vi/OzLKYQGWvnI/0.jpg)](https://youtu.be/OzLKYQGWvnI)
+
+https://youtu.be/OzLKYQGWvnI
 
 ## Technical Paper
 ...

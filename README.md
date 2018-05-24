@@ -30,7 +30,7 @@ pip3 install flask
 The following Packages should be preinstalled but if something is missing make sure these are also ready to use:
 
 * Sqlite3
-* Radom
+* Random
 * Datetime
 * Json
 * Urllib3
